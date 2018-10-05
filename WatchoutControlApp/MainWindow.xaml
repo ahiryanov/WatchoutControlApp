@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WatchoutControlApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="158.073" Width="297.534">
     <Grid>
-        
+
+        <Label Content="Watchout IP Address" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+        <TextBox Name="IPTextBox" HorizontalAlignment="Right" Height="23" Margin="0,10,10,0" VerticalAlignment="Top" Width="120" TextChanged="IPTextBox_TextChanged" LostFocus="IPTextBox_LostFocus"/>
+        <Button Content="Open button" HorizontalAlignment="Right" Margin="0,0,10,10.2" VerticalAlignment="Bottom" Width="75" RenderTransformOrigin="0.281,0.424" Click="Button_Click" Grid.Row="1"/>
+        <Label Content="Choose timeline" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.643,-1.049" Grid.RowSpan="2"/>
+        <ComboBox Name="timelineChooseComboBox" HorizontalAlignment="Right" Margin="0,44,10,0" VerticalAlignment="Top" Width="120" SelectionChanged="timelineChooseComboBox_SelectionChanged" Grid.RowSpan="2"/>
+
     </Grid>
 </Window>
