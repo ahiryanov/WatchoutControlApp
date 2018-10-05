@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfAnimatedGif;
 
 namespace WatchoutControlApp
 {
@@ -22,9 +23,12 @@ namespace WatchoutControlApp
     public partial class ButtonWindow : Window
     {
         Socket socket;
+        bool touch = false;
         public ButtonWindow()
         {
+            
             InitializeComponent();
+            //media.Play();
             try
             {
                 IPAddress ipAddr = IPAddress.Parse(Properties.Settings.Default.ipaddress);
@@ -47,13 +51,45 @@ namespace WatchoutControlApp
 
         private void Button_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            byte[] msg = Encoding.UTF8.GetBytes("run \"" + Properties.Settings.Default.timeline + "\"\n");
-            try
+            if (!touch)
             {
-                int bytesSent = socket.Send(msg);
+                var controller = ImageBehavior.GetAnimationController(backgroung);
+                controller.Play();
+                controller.CurrentFrameChanged += Controller_CurrentFrameChanged;
+                byte[] msg = Encoding.UTF8.GetBytes("run \"" + Properties.Settings.Default.timeline + "\"\n");
+                try
+                {
+                    int bytesSent = socket.Send(msg);
+                }
+                catch
+                { }
+                touch = true;
             }
-            catch
-            { }
+        }
+
+        private void button_TouchDown(object sender, TouchEventArgs e)
+        {
+            if (!touch)
+            {
+                var controller = ImageBehavior.GetAnimationController(backgroung);
+                controller.Play();
+                controller.CurrentFrameChanged += Controller_CurrentFrameChanged;
+                byte[] msg = Encoding.UTF8.GetBytes("run \"" + Properties.Settings.Default.timeline + "\"\n");
+                try
+                {
+                    int bytesSent = socket.Send(msg);
+                }
+                catch
+                { }
+                touch = true;
+            }
+        }
+
+        private void Controller_CurrentFrameChanged(object sender, EventArgs e)
+        {
+            var controller = sender as ImageAnimationController;
+            if (controller.CurrentFrame == controller.FrameCount - 1)
+                controller.Pause();
         }
     }
 }

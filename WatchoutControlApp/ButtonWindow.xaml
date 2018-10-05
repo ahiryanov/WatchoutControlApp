@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:local="clr-namespace:WatchoutControlApp"
         mc:Ignorable="d"
-        Title="ButtonWindow" Keyboard.KeyDown="Window_KeyDown" WindowState="Normal" WindowStyle="SingleBorderWindow" ResizeMode="NoResize">
+        Title="ButtonWindow" Keyboard.KeyDown="Window_KeyDown" WindowState="Maximized" WindowStyle="None" ResizeMode="NoResize" Height="1135.6" Width="755.2" MouseDown="Button_MouseDown" TouchDown="button_TouchDown">
     <Grid>
-        <Button Content="Кнопка" HorizontalAlignment="Center" VerticalAlignment="Center" Width="457" Height="260" PreviewMouseDown="Button_MouseDown"/>
-        <MediaElement Visibility="Hidden"/>
+        <Image Name="button" gif:ImageBehavior.AnimatedSource="palm.gif" Stretch="Fill"/>
+        <Image Name="backgroung" gif:ImageBehavior.AnimatedSource="bg.gif"  gif:ImageBehavior.AutoStart="False" Stretch="Fill"/>
     </Grid>
 </Window>
